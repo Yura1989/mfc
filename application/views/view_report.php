@@ -183,7 +183,7 @@
 </div>
 
 <!--Скрытое модальное окно-->
-<div class="com-md4" style="top: 45%; opacity: 0;">
+<div id="modal_form" style="display: none; top: 45%; opacity: 0;">
     <span id="modal_close">X</span>
     <form action="" method="post">
         <h4>Форма добавления услуг</h4>
@@ -258,7 +258,7 @@
         $('.Btn_hide').hide();
     }
 
-    /*автоматический подсчет суммы услуг*/
+    /*Автоматический подсчет суммы услуг*/
     function result() {
         var n = document.getElementsByClassName('number_reception').length;
         var i=0;
