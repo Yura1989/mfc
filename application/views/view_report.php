@@ -12,10 +12,7 @@
 <style type="text/css">
     /* Окно */
     #modal_form {
-        width: 300px;
-        height: 300px; /* Размеры должны быть фиксированы */
-        border-radius: 5px;
-        border: 3px #000 solid;
+        width: 500px;
         background: #fff;
         position: fixed; /* чтобы окно было в видимой зоне в любом месте */
         top: 45%; /* отступаем сверху 45%, остальные 5% подвинет скрипт */
@@ -25,15 +22,14 @@
         display: none; /* в обычном состоянии окна не должно быть */
         opacity: 0; /* полностью прозрачно для анимирования */
         z-index: 5; /* окно должно быть наиболее большем слое */
-        padding: 20px 10px;
     }
     /* Кнопка закрыть для тех кто в танке) */
     #modal_form #modal_close {
         width: 21px;
         height: 21px;
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 5px;
+        right: 0px;
         cursor: pointer;
         display: block;
     }
@@ -186,13 +182,25 @@
 <div id="modal_form" style="display: none; top: 45%; opacity: 0;">
     <span id="modal_close">X</span>
     <form action="" method="post">
-        <h4>Форма добавления услуг</h4>
-        <p>Выберите услугу и нажмите добавить<br>
-            <input type="text" name="your-name" value="" size="40">
-        </p>
-        <p style="text-align: center; padding-bottom: 10px;">
-            <input type="button" value="Добавить услугу">
-        </p>
+        <div class="pricing-card-mfc">
+            <div class="pricing-card-header bg-info">
+                <span id="modal_close">X</span>
+                <h1 class="pricing-card-price">
+                    <span class="pricing-card-currency">Форма добавления услуг</span>
+                </h1>
+            </div>
+            <div class="pricing-card-body">
+                <ul class="pricing-card-details">
+                    <li>Выберите услугу и нажмите добавить</li>
+                    <select size="1" class="custom-select">
+                        <?php if ($flag != 0) foreach ($report as $item):  ?>
+                            <option value="" selected=""><?php if (isset ($item['name_service'])) {echo $item['name_service']; } ?></option>
+                        <?php endforeach;  ?>
+                    </select>
+                </ul>
+                <a class="btn btn-info btn-pill" href="#">Добавить услугу</a>
+            </div>
+        </div>
     </form>
 </div>
 <div id="overlay" style="display: none;"></div>
