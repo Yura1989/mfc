@@ -25,7 +25,7 @@ class Model_sms extends CI_Model{
             return $query;
         } else {
             $json = json_decode($query);
-            $query = $json->{'description'};
+            $query = $json->{'name'};
             return $query;
         }
     }

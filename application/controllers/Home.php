@@ -609,7 +609,6 @@ class Home extends CI_Controller {
         $this->load->view('template/view_menu');
         $this->load->view('view_exportExcel');
         $this->load->view('template/view_footer');
-
     }
 
     /*Тестирование выгрузки в Excel*/
@@ -876,6 +875,15 @@ class Home extends CI_Controller {
         $this->load->view('modelWindow');
     }
 
+    function SelectServices ()
+    {
+
+        $this->load->view('template/view_header');
+        $this->load->view('view_content');
+        $this->load->view('template/view_footer');
+        $this->load->view('SelectServices');
+    }
+
     function Cleartest()
     {
         $n = count($_POST);
@@ -889,6 +897,15 @@ class Home extends CI_Controller {
     function telephon()
     {
         $this->load->view('telephon');
+    }
+
+    function sendv2 ()
+    {
+        $this->load->view('test');
+    }
+
+    function ajaxtest () {
+        $this->load->view('ajaxtest');
     }
 
     function test()

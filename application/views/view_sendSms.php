@@ -7,38 +7,6 @@
         $('#number').mask('8 (999) 999-99-99');
     });
 </script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#phone').blur(function() {
-            if($(this).val() != '') {
-                var pattern = /^\d[\d\(\)\ -]{4,14}\d$/;
-                if(pattern.test($(this).val())){
-                    $(this).css({'border' : '1px solid #569b44'});
-                    $('#valid').text('Верно');
-                } else {
-                    $(this).css({'border' : '1px solid #ff0000'});
-                    $('#valid').text('Не верно');
-                }
-            } else {
-                $(this).css({'border' : '1px solid red'});
-                $('#valid').text('Поле email не должно быть пустым');
-            }
-        });
-    });
-</script>
-
-<h2>Проверка email</h2>
-<form method="post" action="#">
-    <p>
-        <input type="text" id="phone" />
-        <span id="valid"></span>
-    </p>
-    <p>
-        <input type="submit" value="Отправить" />
-    </p>
-</form>
-
 <div class="layout-content">
     <div class="layout-content-body">
         <div class="title-bar">

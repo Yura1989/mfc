@@ -1,7 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dudin
- * Date: 23.10.2018
- * Time: 16:45
- */
+// файл http://hostname/ajaxtest.php
+echo "I get param1 = ".$_POST['param1']." and param2 = ".$_POST['param2'];
+?>
