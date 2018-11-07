@@ -17,17 +17,35 @@ class Model_sms extends CI_Model{
     }
 
     /*Функция отправки одного сообщения*/
-    function sendSms($add, $id, $key, $bytehandFrom)
+    function sendSms($add, $key, $bytehandFrom)
     {
-        $query = @file_get_contents('http://bytehand.com:3800/send?id='.$id.'&key='.$key.'&to='.urlencode($add['number']).'&from='.urlencode($bytehandFrom).'&text='.urlencode($add['message']));
-        if ($query === false) {
-            /*$query = "Ошибка при отправке сообщения!!!";*/
-            return $query;
-        } else {
-            $json = json_decode($query);
-            $query = $json->{'name'};
-            return $query;
-        }
+        $data = array('sender' => $bytehandFrom,
+            'receiver' => $add['number'],
+            'text' => $add['message'],);
+        $data_json = json_encode($data);
+
+        $ch = curl_init('https://api.bytehand.com/v2/sms/messages');
+
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,array(
+            'Content-Type: application/json',
+            'Content-Type: charset=UTF-8',
+            'X-Service-Key: '.$key));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $result_jsdecode = json_decode(json_encode($result), True);
+            if (isset ($result_jsdecode['count'])) {
+                return $result_jsdecode;
+            } else {
+                return false;
+            }
     }
 
     /*Вывод сообщения об успешной отправке*/

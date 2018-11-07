@@ -194,22 +194,27 @@ class Home extends CI_Controller {
                 $add['number'] = $queryString;
                 $add['message'] = "Приглашаем Вас в МФЦ г.Югорска за получением готовых документов";
                 $add['date'] = date('Y-m-d');
-                $id = "2957";
-                $key = "FAA8FF722EACF2E2";
+                $key = "w345EzxovCgc9FKlFd4kih3clBjMU3o___r";
                 $bytehandFrom = "MFC";
 
-                $this->load->model('model_sms');
-                $data['description'] = $this->model_sms->sendSms($add, $id, $key, $bytehandFrom);
+                $this->load->model('Model_sms');
+                $data['description'] = $this->Model_sms->sendSms($add, $key, $bytehandFrom);
                 $add['description'] = $data['description'];
 
-                $this->load->model('model_db');
-                $this->model_db->addSms($add);
+                if ($add['description'] == FALSE) {
+                    $this->load->view('template/view_header');
+                    $this->load->view('template/view_menu');
+                    $this->load->view('view_sendSms');
+                    $this->load->view('template/view_footer');
+                } else {
+                    $this->load->model('Model_db');
+                    $this->Model_db->addSms($add);
 
-                $this->load->view('template/view_header');
-                $this->load->view('template/view_menu');
-                $this->load->view('view_results', $add);
-                $this->load->view('template/view_footer');
-
+                    $this->load->view('template/view_header');
+                    $this->load->view('template/view_menu');
+                    $this->load->view('view_results', $add);
+                    $this->load->view('template/view_footer');
+                }
             }else{
                 $this->load->view('template/view_header');
                 $this->load->view('template/view_menu');
