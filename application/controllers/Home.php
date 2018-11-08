@@ -60,6 +60,83 @@ class Home extends CI_Controller {
         $this->load->view('template/view_footer');
     }
 
+    /*--------------------------------------------------------*/
+    /*Отправка SMS-сообщения*/
+    function sendSms()
+    {
+        if (isset ($_POST['send'])){
+
+            $string = $this->input->post('number');
+            $count = array ("-", "(", ")", " ");
+            $queryString=str_replace ($count, '', $string);
+            $checktitle = preg_match("/^[0-9]{11}$/",$queryString);
+
+            if ($checktitle == TRUE ){
+                $add['number'] = $queryString;
+                $add['message'] = "Приглашаем Вас в МФЦ г.Югорска за получением готовых документов";
+                $add['date'] = date('Y-m-d');
+                $key = "w345EzxovCgc9FKlFd4kih3clBjMU3o___r";
+                $bytehandFrom = "MFC";
+
+                $this->load->model('Model_sms');
+                $data['description'] = $this->Model_sms->sendSms($add, $key, $bytehandFrom);
+                $add['description'] = $data['description']['id'];
+
+                if (isset ($data['description']['error'])) {
+                    $this->load->view('template/view_header');
+                    $this->load->view('template/view_menu');
+                    $this->load->view('view_sendSms', $data);
+                    $this->load->view('template/view_footer');
+                } else {
+                    $this->load->model('Model_db');
+                    $this->Model_db->addSms($add);
+
+                    $this->load->view('template/view_header');
+                    $this->load->view('template/view_menu');
+                    $this->load->view('view_results', $add);
+                    $this->load->view('template/view_footer');
+                }
+            }else{
+                $this->load->view('template/view_header');
+                $this->load->view('template/view_menu');
+                $this->load->view('view_sendSms');
+                $this->load->view('template/view_footer');
+            }
+        }else{
+            $this->load->view('template/view_header');
+            $this->load->view('template/view_menu');
+            $this->load->view('view_sendSms');
+            $this->load->view('template/view_footer');
+        }
+    }
+
+    function hystory()
+    {
+        $this->load->view('template/view_header');
+        $this->load->view('template/view_menu');
+        $this->load->view('view_hystory');
+        $this->load->view('template/view_footer');
+    }
+
+    function transfer()
+    {
+        $this->load->view('template/view_header');
+        $this->load->view('template/view_menu');
+        $this->load->view('view_hystory');
+        $this->load->view('template/view_footer');
+    }
+
+    function balance()
+    {
+        $balance['login'] = "34159";
+        $balance['key'] = "6FFE53A3E0B16022";
+        $this->load->view('template/view_header');
+        $this->load->view('template/view_menu');
+        $this->load->view('view_balance');
+        $this->load->view('template/view_footer');
+    }
+    /*--------------------------------------------------------*/
+
     /*Добавление пользователя*/
     function addUser()
     {
@@ -180,55 +257,6 @@ class Home extends CI_Controller {
         }
     }
 
-    /*Отправка SMS-сообщения*/
-    function sendSms()
-    {
-        if (isset ($_POST['send'])){
-
-            $string = $this->input->post('number');
-            $count = array ("-", "(", ")", " ");
-            $queryString=str_replace ($count, '', $string);
-            $checktitle = preg_match("/^[0-9]{11}$/",$queryString);
-            
-            if ($checktitle == TRUE ){
-                $add['number'] = $queryString;
-                $add['message'] = "Приглашаем Вас в МФЦ г.Югорска за получением готовых документов";
-                $add['date'] = date('Y-m-d');
-                $key = "w345EzxovCgc9FKlFd4kih3clBjMU3o___r";
-                $bytehandFrom = "MFC";
-
-                $this->load->model('Model_sms');
-                $data['description'] = $this->Model_sms->sendSms($add, $key, $bytehandFrom);
-                $add['description'] = $data['description'];
-
-                if ($add['description'] == FALSE) {
-                    $this->load->view('template/view_header');
-                    $this->load->view('template/view_menu');
-                    $this->load->view('view_sendSms');
-                    $this->load->view('template/view_footer');
-                } else {
-                    $this->load->model('Model_db');
-                    $this->Model_db->addSms($add);
-
-                    $this->load->view('template/view_header');
-                    $this->load->view('template/view_menu');
-                    $this->load->view('view_results', $add);
-                    $this->load->view('template/view_footer');
-                }
-            }else{
-                $this->load->view('template/view_header');
-                $this->load->view('template/view_menu');
-                $this->load->view('view_sendSms');
-                $this->load->view('template/view_footer');
-            }
-        }else{
-            $this->load->view('template/view_header');
-            $this->load->view('template/view_menu');
-            $this->load->view('view_sendSms');
-            $this->load->view('template/view_footer');
-        }
-    }
-
     /*Отправка нескольких SMS-сообщений*/
     function sendManySms()
     {
@@ -268,14 +296,6 @@ class Home extends CI_Controller {
             $this->load->view('view_sendManySms');
             $this->load->view('template/view_footer');
         }
-    }
-
-    function hystory()
-    {   
-        $this->load->view('template/view_header');
-        $this->load->view('template/view_menu');
-        $this->load->view('view_hystory');
-        $this->load->view('template/view_footer');
     }
 
     function reportTest()

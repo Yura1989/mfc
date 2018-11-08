@@ -1,44 +1,33 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <link href="../../css/style.css" rel="stylesheet">
-    <link href="../../css/style_form.css" rel="stylesheet">
-</head>
-<body>
-
-<div id="container">
-    <div id="body">
-    <p>Для запроса баланса введи ID и KEY</p>
-    <div id="body">
-
-        <form method="POST" action="<?=base_url();?>index.php/welcome/balance" name="form" id="form" class="contact_form" action="#" method="post" name="contact_form">
-            <ul>
-                <li>
-                    <h2>Запрос Баланса</h2>
-                </li>
-                <li>
-                    <label for="id">Введите id: </label>
-                    <input type="text" id="id" name="id" required />
-                    <span id="messageID"></span>
-                </li>
-                <li>
-                    <label for="key">Введите Key </label>
-                    <input type="text"id="key" name="key" required />
-                    <span id="messageKEY"></span>
-                </li>
-                <li>
-                    <button class="submit" type="submit" id="balance" name="balance">Отправить запрос</button>
-                </li>
-            </ul>
-        </form>
-
-    </div>
-    <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+<div class="layout-content">
+    <div class="layout-content-body">
+        <div class="title-bar">
+            <h1 class="title-bar-title">
+                <span class="d-ib">Запрос Баланса</span>
+            </h1>
+            <p class="title-bar-description">
+                <small>Для просотра баланса нажмите кнопку</small>
+            </p>
         </div>
+        <div class="col-xs-6 col-md-12">
+            <div class="form-group">
+                <button type="submit" onclick="send();" name="send" class="btn btn-primary btn-info" id="send" >Отправить запрос</button>
+            </div>
+            <div class="results">Ждем ответа</div>
+        </div>
+    </div>
 </div>
+<script>
+    function send ()
+    {
+       $.ajax({
+           type: "GET",
+           dataType: 'json',
+           url: 'http://api.bytehand.com/v1/balance?id=34159&key=6FFE53A3E0B16022',
+           success: function (data) {
+               $('.results').html(data);
+               alert(data);
+           }
+       });
+    }
+</script>
 
-</body>
-</html>

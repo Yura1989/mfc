@@ -25,6 +25,9 @@
                             <label class=" control-label" for="number">Телефон</label>
                                 <input id="number" class="form-control" name="number" required type="text"placeholder="8 (___) ___-__-__">
                                 <span class="help-block">Введите номер мобильного телефона</span>
+                                <?php if (isset ($description['error'])) { ?>
+                                    <script> alert ("Смс не отправлено, ошибка: <?php echo ($description['error']); ?> "); </script>
+                            <?php } ?>
                         </div>
                         <div class="form-group">
                             <button type="submit" name="send" class="btn btn-primary btn-block">Отправить сообщение</button>

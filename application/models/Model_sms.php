@@ -40,12 +40,8 @@ class Model_sms extends CI_Model{
 
         $result = curl_exec($ch);
         curl_close($ch);
-        $result_jsdecode = json_decode(json_encode($result), True);
-            if (isset ($result_jsdecode['count'])) {
-                return $result_jsdecode;
-            } else {
-                return false;
-            }
+        $result_jsdecode = json_decode($result, TRUE);
+        return $result_jsdecode;
     }
 
     /*Вывод сообщения об успешной отправке*/

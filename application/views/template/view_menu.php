@@ -24,24 +24,11 @@
                             </a>
                             <ul class="sidenav-subnav collapse">
                                 <li class="sidenav-subheading">SMS-сообщения</li>
-                                <li><a href="<?=base_url();?>home/sendSms">Отправка одного SMS-сообщение</a></li>
-                                <li><a href="<?=base_url();?>home/sendManySms">Отправка нескольких SMS-сообщение</a></li>
+                                <li><a href="<?=base_url();?>home/sendSms">Отправка SMS-сообщение</a></li>
+                                <li><a href="<?=base_url();?>home/sendManySms">История отправки</a></li>
                                 <li><a href="dashboard-2.html">Проверка доставки</a></li>
+                                <li><a href="<?=base_url();?>home/balance">Просмотр баланса</a></li>
                             </ul>
-                        </li>
-
-                        <li class="sidenav-item">
-                            <a href="<?=base_url()?>home/hystory" >
-                                <span class="sidenav-icon icon icon-list"></span>
-                                <span class="sidenav-label">История отправки</span>
-                            </a>
-                        </li>
-
-                        <li class="sidenav-item">
-                            <a href="#" >
-                                <span class="sidenav-icon icon icon-briefcase"></span>
-                                <span class="sidenav-label">Просмотр баланса</span>
-                            </a>
                         </li>
 
                         <li class="sidenav-item has-subnav">
