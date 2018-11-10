@@ -10,24 +10,20 @@
         </div>
         <div class="col-xs-6 col-md-12">
             <div class="form-group">
-                <button type="submit" onclick="send();" name="send" class="btn btn-primary btn-info" id="send" >Отправить запрос</button>
+                <form method="POST" action="<?=base_url();?>home/balance">
+                    <input type="submit" name="send" class="btn btn-primary btn-info" value="Отправить запрос" >
+                </form>
             </div>
-            <div class="results">Ждем ответа</div>
+            <?php
+            if (isset ($description)) { ?>
+                <div class="pricing-card">
+                    <div class="pricing-card-header bg-success">
+                        <h4 class="m-y-sm">Баланс Вашего счета составляет ". <?php echo $description; ?>. " рублей</h4>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
     </div>
 </div>
-<script>
-    function send ()
-    {
-       $.ajax({
-           type: "GET",
-           dataType: 'json',
-           url: 'http://api.bytehand.com/v1/balance?id=34159&key=6FFE53A3E0B16022',
-           success: function (data) {
-               $('.results').html(data);
-               alert(data);
-           }
-       });
-    }
-</script>
+
 

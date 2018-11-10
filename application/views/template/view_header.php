@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="<?= base_url();?>assets/css/elephant.min.css">
     <link rel="stylesheet" href="<?= base_url();?>assets/css/application.min.css">
     <link rel="stylesheet" href="<?= base_url();?>assets/css/demo.min.css">
-    <link rel="stylesheet" href="<?= base_url();?>assets/bootstrap-datepicker/css/bootstrap-datepicker3.css">
-    <link rel="stylesheet" href="<?= base_url();?>assets/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
-    <link rel="stylesheet" href="<?= base_url();?>assets/bootstrap-datepicker/css/bootstrap-datepicker3.standalone.css">
-    <link rel="stylesheet" href="<?= base_url();?>assets/bootstrap-datepicker/css/bootstrap-datepicker3.standalone.min.css">
+<!--    <link rel="stylesheet" href="--><?//= base_url();?><!--assets/datepicker/css/bootstrap-datepicker3.css">-->
+<!--    <link rel="stylesheet" href="--><?//= base_url();?><!--assets/datepicker/css/bootstrap-datepicker3.min.css">-->
+<!--    <link rel="stylesheet" href="--><?//= base_url();?><!--assets/datepicker/css/bootstrap-datepicker3.standalone.css">-->
+<!--    <link rel="stylesheet" href="--><?//= base_url();?><!--assets/datepicker/css/bootstrap-datepicker3.standalone.min.css">-->
 
 </head>
 

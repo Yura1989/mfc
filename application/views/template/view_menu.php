@@ -24,10 +24,10 @@
                             </a>
                             <ul class="sidenav-subnav collapse">
                                 <li class="sidenav-subheading">SMS-сообщения</li>
-                                <li><a href="<?=base_url();?>home/sendSms">Отправка SMS-сообщение</a></li>
-                                <li><a href="<?=base_url();?>home/sendManySms">История отправки</a></li>
+                                <li><a href="<?=base_url();?>Home/sendSms">Отправка SMS-сообщение</a></li>
+                                <li><a href="<?=base_url();?>Home/hystory">История отправки</a></li>
                                 <li><a href="dashboard-2.html">Проверка доставки</a></li>
-                                <li><a href="<?=base_url();?>home/balance">Просмотр баланса</a></li>
+                                <li><a href="<?=base_url();?>Home/balance">Просмотр баланса</a></li>
                             </ul>
                         </li>
 
@@ -38,8 +38,8 @@
                             </a>
                             <ul class="sidenav-subnav collapse">
                                 <li class="sidenav-subheading">Пользователи</li>
-                                <li><a href="<?=base_url();?>home/addUser">Добавить пользователя</a></li>
-                                <li><a href="<?=base_url();?>home/users">Просмотр пользователей</a></li>
+                                <li><a href="<?=base_url();?>Home/addUser">Добавить пользователя</a></li>
+                                <li><a href="<?=base_url();?>Home/users">Просмотр пользователей</a></li>
                             </ul>
                         </li>
 

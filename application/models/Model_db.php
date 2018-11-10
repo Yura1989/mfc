@@ -36,6 +36,13 @@ class Model_db extends CI_Model
         $this->db->insert('sms', $sms);
     }
 
+    /*Выгрузка истории отправки СМС*/
+    function hystorySms ($query)
+    {
+        $result = $this->db->query($query);
+        return $result->result_array();
+    }
+
     function connectOracle()
     {
         $conn = oci_connect("pvd", "pvd", "10.27.23.50/XE");

@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="demo-form-wrapper">
-                    <form id="demo-inputmask" class="form-horizontal"  method="POST" action="<?=base_url();?>home/sendSms">
+                    <form id="demo-inputmask" class="form-horizontal"  method="POST" action="<?=base_url();?>Home/sendSms">
                         <div class="form-group">
                             <label class=" control-label" for="number">Телефон</label>
                                 <input id="number" class="form-control" name="number" required type="text"placeholder="8 (___) ___-__-__">

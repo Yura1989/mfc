@@ -112,10 +112,23 @@ class Home extends CI_Controller {
 
     function hystory()
     {
-        $this->load->view('template/view_header');
-        $this->load->view('template/view_menu');
-        $this->load->view('view_hystory');
-        $this->load->view('template/view_footer');
+        if (isset ($_POST['send']) && (($_POST['start']) != NULL) && (($_POST['end']) != NULL))
+        {
+            $data['startDate'] = $this->input->post('start');
+            $data['endDate'] = $this->input->post('end');
+            $query = sprintf('SELECT * FROM sms WHERE date BETWEEN '.'\''. $data['startDate'].'\''.' AND '.'\''.$data['endDate'].'\'');
+            $this->load->model('Model_db');
+            $result['data'] = $this->Model_db->hystorySms($query);
+                $this->load->view('template/view_header');
+                $this->load->view('template/view_menu');
+                $this->load->view('view_hystory', $result);
+                $this->load->view('template/view_footer');
+        }else{
+            $this->load->view('template/view_header');
+            $this->load->view('template/view_menu');
+            $this->load->view('view_hystory');
+            $this->load->view('template/view_footer');
+        }
     }
 
     function transfer()
@@ -126,14 +139,25 @@ class Home extends CI_Controller {
         $this->load->view('template/view_footer');
     }
 
+    /*Просмотр баланса*/
     function balance()
     {
-        $balance['login'] = "34159";
+        $balance['id'] = "34159";
         $balance['key'] = "6FFE53A3E0B16022";
-        $this->load->view('template/view_header');
-        $this->load->view('template/view_menu');
-        $this->load->view('view_balance');
-        $this->load->view('template/view_footer');
+
+        if (isset ($_POST['send'])){
+            $this->load->model('Model_sms');
+            $result = $this->Model_sms->balance($balance);
+                $this->load->view('template/view_header');
+                $this->load->view('template/view_menu');
+                $this->load->view('view_balance', $result);
+                $this->load->view('template/view_footer');
+        } else {
+            $this->load->view('template/view_header');
+            $this->load->view('template/view_menu');
+            $this->load->view('view_balance');
+            $this->load->view('template/view_footer');
+        }
     }
     /*--------------------------------------------------------*/
 

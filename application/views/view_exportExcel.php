@@ -14,9 +14,9 @@
                         <div class="form-group" id="rangeDate">
                             <div class="input-daterange input-group" id="datepicker">
                                 <span class="input-group-addon">от</span>
-                                <input type="text" class="input-sm form-control" name="start" />
+                                <input type="text" autocomplete="off" class="input-sm form-control" name="start" />
                                 <span class="input-group-addon">до</span>
-                                <input type="text" class="input-sm form-control" name="end" />
+                                <input type="text" autocomplete="off" class="input-sm form-control" name="end" />
                             </div>
                         </div>
 

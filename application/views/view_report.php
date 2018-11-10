@@ -63,7 +63,7 @@
                                 <form method="POST">
                                     <div class="form-group" id="rangeDate">
                                         <div class="input-group ">
-                                            <input type="text" name="dateReport" readonly="readonly" class="form-control" value="<?php if(isset ($_POST['dateReport'])) { echo $_POST['dateReport']; } ?> ">
+                                            <input type="text" name="dateReport" autocomplete="off" readonly="readonly" class="form-control" value="<?php if(isset ($_POST['dateReport'])) { echo $_POST['dateReport']; } ?> ">
                                                 <span class="input-group-btn">
                                                     <button id="demo-datepicker-2-btn" class="btn btn-primary" type="button">
                                                         <span class="icon icon-calendar"></span>
