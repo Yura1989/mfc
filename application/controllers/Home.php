@@ -135,7 +135,7 @@ class Home extends CI_Controller {
     {
         $this->load->view('template/view_header');
         $this->load->view('template/view_menu');
-        $this->load->view('view_hystory');
+        $this->load->view('view_transfer');
         $this->load->view('template/view_footer');
     }
 

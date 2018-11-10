@@ -26,7 +26,7 @@
                                 <li class="sidenav-subheading">SMS-сообщения</li>
                                 <li><a href="<?=base_url();?>Home/sendSms">Отправка SMS-сообщение</a></li>
                                 <li><a href="<?=base_url();?>Home/hystory">История отправки</a></li>
-                                <li><a href="dashboard-2.html">Проверка доставки</a></li>
+                                <li><a href="<?=base_url();?>Home/transfer">Поиск номера и проверка доставки</a></li>
                                 <li><a href="<?=base_url();?>Home/balance">Просмотр баланса</a></li>
                             </ul>
                         </li>

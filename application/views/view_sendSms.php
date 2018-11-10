@@ -23,7 +23,7 @@
                     <form id="demo-inputmask" class="form-horizontal"  method="POST" action="<?=base_url();?>Home/sendSms">
                         <div class="form-group">
                             <label class=" control-label" for="number">Телефон</label>
-                                <input id="number" class="form-control" name="number" required type="text"placeholder="8 (___) ___-__-__">
+                                <input id="number" class="form-control" autocomplete="off" name="number" required type="text"placeholder="8 (___) ___-__-__">
                                 <span class="help-block">Введите номер мобильного телефона</span>
                                 <?php if (isset ($description['error'])) { ?>
                                     <script> alert ("Смс не отправлено, ошибка: <?php echo ($description['error']); ?> "); </script>
