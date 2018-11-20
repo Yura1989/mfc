@@ -192,13 +192,13 @@
             <div class="pricing-card-body">
                 <ul class="pricing-card-details">
                     <li>Выберите услугу и нажмите добавить</li>
-                    <select size="1" class="custom-select">
+                    <select size="1" id="basic">
                         <?php if ($flag != 0) foreach ($report as $item):  ?>
                             <option value="" selected=""><?php if (isset ($item['name_service'])) {echo $item['name_service']; } ?></option>
                         <?php endforeach;  ?>
                     </select>
                 </ul>
-                <a class="btn btn-info btn-pill" href="#">Добавить услугу</a>
+                <a class="btn btn-info btn-pill" name="addservices" id="addservices" Onclick="addservices()" href="#">Добавить услугу</a>
             </div>
         </div>
     </form>
@@ -208,6 +208,8 @@
 <script src="<?=base_url();?>assets/js/jquery-3.2.1.min.js"></script>
 <script src="<?=base_url();?>assets/datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="<?=base_url();?>assets/datepicker/locales/bootstrap-datepicker.ru.min.js" charset="UTF-8"></script>
+<link rel="stylesheet" href="<?= base_url();?>assets/modelselect/selectric.css">
+<script src="<?= base_url();?>assets/modelselect/jquery.selectric.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -249,6 +251,22 @@
 
     });
 
+    function addservices (){
+        if (confirm ("Вы точно хотите добавить данную услугу?"))
+        {
+        }else {
+            $(function() { // ловим клик по крестику или подложке
+                $('#modal_form')
+                    .animate({opacity: 0, top: '45%'}, 200,  // плавно меняем прозрачность на 0 и одновременно двигаем окно вверх
+                        function(){ // после анимации
+                            $(this).css('display', 'none'); // делаем ему display: none;
+                            $('#overlay').fadeOut(400); // скрываем подложку
+                        }
+                    );
+            });
+        }
+    }
+
     /*функция выгрузки в excel*/
     function exportExcel (){
         location.href = '<?=base_url();?>/Home/action'
@@ -281,4 +299,10 @@
             i++;
         }
     }
+</script>
+
+<script>
+    $(function() {
+        $('#basic').selectric();
+    });
 </script>

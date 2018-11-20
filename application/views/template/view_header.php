@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Система МАУ "МФЦ" г.Югорск</title>
     <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url();?>assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="<?= base_url();?>assets/img/favicon-32x32.png" sizes="32x32">
@@ -12,10 +11,6 @@
     <link rel="stylesheet" href="<?= base_url();?>assets/css/elephant.min.css">
     <link rel="stylesheet" href="<?= base_url();?>assets/css/application.min.css">
     <link rel="stylesheet" href="<?= base_url();?>assets/css/demo.min.css">
-<!--    <link rel="stylesheet" href="--><?//= base_url();?><!--assets/datepicker/css/bootstrap-datepicker3.css">-->
-<!--    <link rel="stylesheet" href="--><?//= base_url();?><!--assets/datepicker/css/bootstrap-datepicker3.min.css">-->
-<!--    <link rel="stylesheet" href="--><?//= base_url();?><!--assets/datepicker/css/bootstrap-datepicker3.standalone.css">-->
-<!--    <link rel="stylesheet" href="--><?//= base_url();?><!--assets/datepicker/css/bootstrap-datepicker3.standalone.min.css">-->
 
 </head>
 

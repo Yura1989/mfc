@@ -397,7 +397,7 @@ class Home extends CI_Controller {
                 $this->load->view('template/view_header');
                 $this->load->view('template/view_menu');
                 $this->load->view('view_report', $result);
-                $this->load->view('template/view_footer');
+                $this->load->view('template/view_footer_report');
             } else {
                 $this->load->view('template/view_header');
                 $this->load->view('template/view_menu');
@@ -960,11 +960,14 @@ class Home extends CI_Controller {
 
     function SelectServices ()
     {
-
         $this->load->view('template/view_header');
-        $this->load->view('view_content');
-        $this->load->view('template/view_footer');
+        $this->load->view('template/view_menu');
         $this->load->view('SelectServices');
+        //$this->load->view('template/view_footer');
+        //$this->load->view('template/view_header');
+        //$this->load->view('view_content');
+        //$this->load->view('template/view_footer');
+
     }
 
     function Cleartest()
