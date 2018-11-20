@@ -30,6 +30,46 @@
                     </div>
                 </div>
             </div>
+            <?php if (isset ($number)) { ?>
+                <div class="col-xs-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="" class="table table-center">
+                                        <thead>
+                                        <tr>
+                                            <th rowspan="1" colspan="1" style="width: 289px;">Номер телефона</th>
+                                            <th rowspan="1" colspan="1" style="width: 524px;">Текст отправки</th>
+                                            <th rowspan="1" colspan="1" style="width: 524px;">Дата отправки</th>
+                                            <th rowspan="1" colspan="1" style="width: 524px;">Статус</th>
+                                        </thead>
+                                        <tbody>
+                                        <span class="label arrow-left arrow-warning">  <?php if (isset($n)) { echo "Найдено ". $n ." отправленных смс на данный номер мобильного телефона"; } ?> </span>
+                                        <?php foreach ($number as $item): ?>
+                                            <tr>
+                                                <td><?php if (isset ($item['receiver'])) { echo ($item['receiver']);  } else { if ($item['result'] == 'error')  { echo ($_POST['number']); } }  ?></td>
+                                                <td><?php if (isset ($item['text'])) { echo ($item['text']); } ?></td>
+                                                <td><?php if (isset ($item['posted_at'])) { echo (substr(($item['posted_at']), 0, 10)); } else { echo(0); } ?></td>
+                                                <td>
+                                                        <?php if (isset ($item['state'])) { if ($item['state'] == 'delivered')
+                                                        { ?> <span class="label label-success"> <?php echo "Досталено";} else { if ($item['state'] == 'rejected')
+                                                        { ?> <span class="label label-primary"> <?php echo "Отклонено";} else { echo "Ошибка отправки"; } } }
+                                                        else {if ($item['result'] == 'error')
+                                                        { ?> <span class="label label-primary"> <?php echo ("Ошибка доступности сервиса Bytehand"); }} ?>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                         endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
     </div>
 </div>

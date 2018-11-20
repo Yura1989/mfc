@@ -110,6 +110,7 @@ class Home extends CI_Controller {
         }
     }
 
+    /*История отпавки СМС из базы MySQL*/
     function hystory()
     {
         if (isset ($_POST['send']) && (($_POST['start']) != NULL) && (($_POST['end']) != NULL))
@@ -123,6 +124,7 @@ class Home extends CI_Controller {
                 $this->load->view('template/view_menu');
                 $this->load->view('view_hystory', $result);
                 $this->load->view('template/view_footer');
+
         }else{
             $this->load->view('template/view_header');
             $this->load->view('template/view_menu');
@@ -131,12 +133,43 @@ class Home extends CI_Controller {
         }
     }
 
+    /*Поиск и проверка статус смс сообщения по номеру телефона*/
     function transfer()
     {
-        $this->load->view('template/view_header');
-        $this->load->view('template/view_menu');
-        $this->load->view('view_transfer');
-        $this->load->view('template/view_footer');
+        if (isset ($_POST['send']))
+        {
+            $data = $this->input->post('number');
+            $count = array ("-", "(", ")", " ");
+            $queryString=str_replace ($count, '', $data);
+            $checktitle = preg_match("/^[0-9]{11}$/",$queryString);
+            if($checktitle == TRUE){
+                $query = sprintf("SELECT description, date FROM sms WHERE number = %s;",$queryString);
+                $this->load->model('Model_db');
+                $result = $this->Model_db->HystorySMS($query);
+                $answer['date'] = $result;
+                $n = count ($result);
+                $answer['n'] = $n;
+                for ($i=0; $i < $n; $i++){
+                    $query_number = $result[$i]['description'];
+                    $this->load->model('Model_sms');
+                    $answer['number'][] = $this->Model_sms->transfer($query_number);
+                }
+                $this->load->view('template/view_header');
+                $this->load->view('template/view_menu');
+                $this->load->view('view_transfer', $answer);
+                $this->load->view('template/view_footer');
+            }else{
+                $this->load->view('template/view_header');
+                $this->load->view('template/view_menu');
+                $this->load->view('view_transfer');
+                $this->load->view('template/view_footer');
+            }
+        }else{
+            $this->load->view('template/view_header');
+            $this->load->view('template/view_menu');
+            $this->load->view('view_transfer');
+            $this->load->view('template/view_footer');
+        }
     }
 
     /*Просмотр баланса*/
@@ -148,9 +181,10 @@ class Home extends CI_Controller {
         if (isset ($_POST['send'])){
             $this->load->model('Model_sms');
             $result = $this->Model_sms->balance($balance);
+            $string['description'] = substr(($result['description']), 0, 7);
                 $this->load->view('template/view_header');
                 $this->load->view('template/view_menu');
-                $this->load->view('view_balance', $result);
+                $this->load->view('view_balance', $string);
                 $this->load->view('template/view_footer');
         } else {
             $this->load->view('template/view_header');

@@ -14,11 +14,10 @@
                     <input type="submit" name="send" class="btn btn-primary btn-info" value="Отправить запрос" >
                 </form>
             </div>
-            <?php
-            if (isset ($description)) { ?>
+            <?php if (isset ($description)) { ?>
                 <div class="pricing-card">
                     <div class="pricing-card-header bg-success">
-                        <h4 class="m-y-sm">Баланс Вашего счета составляет ". <?php echo $description; ?>. " рублей</h4>
+                        <h4 class="m-y-sm">Баланс Вашего счета составляет <?php echo $description; ?> рублей</h4>
                     </div>
                 </div>
             <?php } ?>

@@ -25,19 +25,20 @@
                         </form>
                     </div>
                 </div>
-
                 <?php if (isset ($_POST['send']) && (($_POST['start']) != NULL) && (($_POST['end']) != NULL)) { ?>
                     <div class="col-xs-12">
                         <div class="panel">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-sm-12">
+
                                         <table id="" class="table table-center">
                                             <thead>
                                             <tr>
                                                 <th rowspan="1" colspan="1" style="width: 289px;">Номер телефона</th>
                                                 <th rowspan="1" colspan="1" style="width: 524px;">Текст отправки</th>
                                                 <th rowspan="1" colspan="1" style="width: 524px;">Дата отправки</th>
+                                                <th rowspan="1" colspan="1" style="width: 524px;">Статус</th>
                                             </thead>
                                             <tbody>
                                             <?php foreach ($data as $item): ?>
@@ -45,6 +46,7 @@
                                                     <td><?php echo($item['number']); ?></td>
                                                     <td><?php echo($item['message']); ?></td>
                                                     <td><?php echo($item['date']); ?></td>
+                                                    <td></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                             </tbody>
