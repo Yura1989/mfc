@@ -597,9 +597,8 @@ class Home extends CI_Controller {
                 $query['typeDepartment'] = $this->Model_db->DBgetDepartment($select_TypeDep);
                 $select_Department = 'SELECT * FROM department s JOIN typeDep p ON s.id_typedep=p.id WHERE id_department='.$id['ID'];
                 $query['department'] = $this->Model_db->DBgetDepartment($select_Department);
-                print_r ($query['department']);
                 $this->load->view('template/view_header');
-                   // $this->load->view('template/view_menu');
+                    $this->load->view('template/view_menu');
                     $this->load->view('view_editDepartment', $query);
                     $this->load->view('template/view_footer');
         }
@@ -960,9 +959,13 @@ class Home extends CI_Controller {
 
     function SelectServices ()
     {
-        $this->load->view('template/view_header');
-        $this->load->view('template/view_menu');
-        $this->load->view('SelectServices');
+        $query = 'SELECT * FROM service s JOIN department d ON s.id_dep=d.id_department JOIN typedep t ON d.id_typedep=t.id WHERE 1';
+        $this->load->Model('Model_db');
+        $result['report'] = $this->Model_db->DBgetReport($query);
+
+        //$this->load->view('template/view_header');
+        //$this->load->view('template/view_menu');
+        $this->load->view('SelectServices', $result);
         //$this->load->view('template/view_footer');
         //$this->load->view('template/view_header');
         //$this->load->view('view_content');

@@ -45,9 +45,60 @@
 
 <body>
 <button class="Btn_show btn btn-info" type="button" id="BTaddEditReport" name="BTaddEditReport">Добавить услугу</button>
+Исходный код этого примера:
 
+<h1>Добавление строки в таблице с помощью DOM javascript</h1>
+    <p>Скрипт добавляет строку в таблицу, после нажатия на ссылку.</p>
+<center>
+    <table id="myTable" cellspacing="0" border="1">
+        <tbody>
+        <tr>
+            <td>Услуга</td><td>Краткое наименование ведомства</td>
+            <td>Полное наименование ведомства</td><td>Номер услуги</td>
+        </tr>
+        <tr>
+            <td>row1_column1</td><td>row1_column1</td>
+            <td>row1_column1</td><td>row1_column1</td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
+
+<table id="tab1" class="sortable">
+    <thead>
+    <tr>
+        <th>ФИО</th>
+        <th>Должность</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<form action="" id="add_persons" method="post" onsubmit="addRow();return false;">
+    <fieldset>
+        <legend>Добавить сотрудника</legend>
+        <ul>
+            <li>
+                <label for="name">Фамилия</label>
+                <input type="text" name="name" id="name" value="" size="12" tabindex="1" />
+            </li>
+            <li>
+                <label for="initials">Инициалы</label>
+                <input type="text" name="initials" id="initials" value="" size="12" tabindex="2" />
+            </li>
+            <li>
+                <label for="posada">Должность</label>
+                <input type="text" name="posada" id="posada" value="" size="12" tabindex="3" />
+            </li>
+            <li>
+                <label for="subm">Действия</label>
+                <input type="submit" name="subm" class="submit" value="Добавить" tabindex="4" />
+            </li>
+        </ul>
+    </fieldset>
+</form>
+<div id="result"></div>
 
 <!--Скрытое модальное окно-->
 <div id="modal_form" style="display: none; top: 45%; opacity: 0;">
@@ -56,18 +107,18 @@
             <div style="max-width: 900px;">
                 <div style="width: 45%">
                     <h3>Basic usage</h3>
-                    <select id="basic">
-                        <option value="">Long item, lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, consectetur, repellat animi nam veniam tempora hic</option>
-                        <option value="strawberries">Strawberries</option>
-                        <option value="mango">Mango</option>
-                        <option value="bananas">Bananas</option>
-                        <option value="watermelon">Watermelon</option>
-                        <option value="apples">Apples</option>
-                        <option value="grapes">Grapes</option>
-                        <option value="oranges">Oranges</option>
-                        <option value="pineapple">Pineapple</option>
-                        <option value="peaches">Peaches</option>
-                        <option value="cherries">Cherries</option>
+                    <a href="" onclick="addRow1('myTable');return false;">Добавить строку</a>
+
+                    <select id="basic" >
+                        <?php foreach ($report as $item): ?>
+                        <option class="services" name="service" data-dep="<?php echo ($item['shortDepartment']); ?>" data-fulldep="<?php echo ($item['fullDepartment']); ?>" data-id_service="<?php echo ($item['id_service']); ?>" value="<?php echo ($item['name_service']); ?>"><?php echo ($item['name_service']); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+
+                    <select id="ddlViewBy" name="select_services">
+                        <option value="test" data-ttt="1" >test</option>
+                        <option value="test2" data-ttt="2" >test2</option>
+                        <option value="test3" data-ttt="3" >test3</option>
                     </select>
                 </div>
             </div>
@@ -88,22 +139,91 @@
 </script>
 
 <script>
+    var name;
+    var initials;
+    var posada;
+
+    function addRow()
+    {
+        // Считываем значения с формы
+        name = document.getElementById('name').value;
+        initials = document.getElementById('initials').value;
+        posada = document.getElementById('posada').value;
+
+        // Находим нужную таблицу
+        var tbody = document.getElementById('tab1').getElementsByTagName('TBODY')[0];
+
+        // Создаем строку таблицы и добавляем ее
+        var row = document.createElement("TR");
+        tbody.appendChild(row);
+
+        // Создаем ячейки в вышесозданной строке
+        // и добавляем тх
+        var td1 = document.createElement("TD");
+        var td2 = document.createElement("TD");
+
+        row.appendChild(td1);
+        row.appendChild(td2);
+
+        // Наполняем ячейки
+        td1.innerHTML = name+' '+initials;
+        td2.innerHTML = posada;
+    }
+</script>
+
+<script type="text/javascript">
+    function addRow1(id){
+
+        var services = document.getElementById("basic").value;
+        var n = document.getElementById("basic");
+        var shortDepartment = n.options[n.selectedIndex].dataset.dep;
+        var fullDepartment = n.options[n.selectedIndex].dataset.fulldep;
+        var id_service = n.options[n.selectedIndex].dataset.id_service;
+
+        console.log(services);
+        console.log(shortDepartment);
+
+        var ee = document.getElementById("ddlViewBy").value;
+        var e = document.getElementById("ddlViewBy");
+        var rc = e.options[e.selectedIndex].dataset.ttt;
+
+        console.log(ee);
+        console.log(rc);
+
+        //var shortDepartment = document.getElementById("shortDepartment").value;
+        //var fullDepartment = document.getElementById("fullDepartment").value;
+        //var id_service = document.getElementById("id_service").value;
+
+        var tbody = document.getElementById(id).getElementsByTagName("TBODY")[0];
+        var row = document.createElement("TR");
+        var td1 = document.createElement("TD");
+        td1.appendChild(document.createTextNode(services));
+        var td2 = document.createElement("TD");
+        td2.appendChild (document.createTextNode(shortDepartment));
+        var td3 = document.createElement("TD");
+        td3.appendChild (document.createTextNode(fullDepartment));
+        var td4 = document.createElement("TD");
+        td4.appendChild (document.createTextNode(id_service));
+        row.appendChild(td1);
+        row.appendChild(td2);
+        row.appendChild(td3);
+        row.appendChild(td4);
+        tbody.appendChild(row);
+
+        $(function() { // ловим клик по крестику или подложке
+            $('#modal_form')
+                .animate({opacity: 0, top: '45%'}, 200,  // плавно меняем прозрачность на 0 и одновременно двигаем окно вверх
+                    function(){ // после анимации
+                        $(this).css('display', 'none'); // делаем ему display: none;
+                        $('#overlay').fadeOut(400); // скрываем подложку
+                    }
+                );
+        });
+    }
+</script>
+
+<script>
     $(document).ready(function() {
-        /*Вывод даты для формирования отчета*/
-        $('#rangeDate .input-group.date').datepicker({
-            format: "yyyy-mm-dd",
-            startView: 1,
-            minViewMode: 1,
-            language: "ru",
-            autoclose: true
-        });
-
-        /*Автоматическое нумерация строк*/
-        $('.tert tbody tr').each(function(i) {
-            var number = i + 1;
-            $(this).find('td:first').text(number+".");
-        });
-
         /*Открываем модальное окно*/
         $('#BTaddEditReport').click( function(event){ // ловим клик по ссылки с id="go"
             event.preventDefault(); // выключаем стандартную роль элемента
@@ -126,37 +246,4 @@
         });
 
     });
-
-    /*функция выгрузки в excel*/
-    function exportExcel (){
-        location.href = '<?=base_url();?>/Home/action'
-    }
-
-    /*Функция изменения атрибутов таблицы*/
-    function editForm () {
-        $(".number_reception").prop("disabled", false);
-        $(".number_consultation").prop("disabled", false);
-        $(".number_bus_recep").prop("disabled", false);
-        $(".number_bus_cons").prop("disabled", false);
-        $(".number_ready").prop("disabled", false);
-        $('.Form_show').show();
-        $('.Btn_show').show();
-        $('.Btn_hide').hide();
-    }
-
-    /*Автоматический подсчет суммы услуг*/
-    function result() {
-        var n = document.getElementsByClassName('number_reception').length;
-        var i=0;
-        while (i < n){
-            var a = parseInt(document.getElementsByClassName('number_reception')[i].value);
-            var b = parseInt(document.getElementsByClassName('number_consultation')[i].value);
-
-            if (isNaN(a)==true) a=0;
-            if (isNaN(b)==true) b=0;
-            var c = a+b;
-            document.getElementsByClassName('result_priem')[i].value = c;
-            i++;
-        }
-    }
 </script>

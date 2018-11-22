@@ -83,7 +83,7 @@
                 <div class="col-xs-12">
                     <div class="panel panel-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-center tert">
+                            <table class="table table-bordered table-hover table-center tert" id="myTable">
                                 <thead>
                                 <tr class="bg-primary">
                                     <th>№</th>
@@ -194,11 +194,11 @@
                     <li>Выберите услугу и нажмите добавить</li>
                     <select size="1" id="basic">
                         <?php if ($flag != 0) foreach ($report as $item):  ?>
-                            <option value="" selected=""><?php if (isset ($item['name_service'])) {echo $item['name_service']; } ?></option>
+                        <option class="services" name="service" data-dep="<?php if (isset ($item['shortDepartment'])) {  echo ($item['shortDepartment']); }?>" data-fulldep="<?php if (isset ($item['fullDepartment'])) {  echo ($item['fullDepartment']); }?>" data-id_service="<?php if (isset ($item['id_service'])) {  echo ($item['id_service']); }?>" value="<?php if (isset ($item['name_service'])) {  echo ($item['name_service']); }?>"> <?php if (isset ($item['name_service'])) {  echo ($item['name_service']); }?> </option>
                         <?php endforeach;  ?>
                     </select>
                 </ul>
-                <a class="btn btn-info btn-pill" name="addservices" id="addservices" Onclick="addservices()" href="#">Добавить услугу</a>
+                <a class="btn btn-info btn-pill" name="addservices" id="addservices" Onclick="addservices('myTable'); return false;" href="#">Добавить услугу</a>
             </div>
         </div>
     </form>
@@ -251,9 +251,76 @@
 
     });
 
-    function addservices (){
+    function addservices (id){
         if (confirm ("Вы точно хотите добавить данную услугу?"))
         {
+            var services = document.getElementById("basic").value;
+            var n = document.getElementById("basic");
+            var shortDepartment = n.options[n.selectedIndex].dataset.dep;
+            var fullDepartment = n.options[n.selectedIndex].dataset.fulldep;
+            var id_service = n.options[n.selectedIndex].dataset.id_service;
+
+            console.log(services);
+            console.log(shortDepartment);
+
+            var tbody = document.getElementById(id).getElementsByTagName("TBODY")[0];
+            var row = document.createElement("TR");
+            var td1 = document.createElement("TD");
+            td1.appendChild(document.createTextNode(0));
+
+            var td2 = document.createElement("TD");
+            td2.innerHTML='<input type="hidden" class="number_reception" value="shortDepartment" name="id_service[]" required>'
+            //td2.appendChild (document.createTextNode(shortDepartment));
+
+            var td3 = document.createElement("TD");
+            td3.appendChild(document.createTextNode(services));
+
+            var td4 = document.createElement("TD");
+            td4.innerHTML='<input oninput="result();" class="number_reception" type="text" value="0" name="number_reception[]" required>'
+
+            var td5 = document.createElement("TD");
+            td5.innerHTML='<input oninput="result();" class="number_consultation" type="text" value="0" name="number_consultation[]" required >'
+
+            var td6 = document.createElement("TD");
+            td6.innerHTML='<input class="number_bus_recep" type="text" value="0" name="number_bus_recep[]" required>'
+
+            var td7 = document.createElement("TD");
+            td7.innerHTML='<input class="number_bus_cons" type="text" value="0" name="number_bus_cons[]" required>'
+
+            var td8 = document.createElement("TD");
+            td8.innerHTML='<input class="result_priem" type="text" value="0" name="result_priem[]" disabled required >'
+
+            var td9 = document.createElement("TD");
+            td9.innerHTML='<input class="number_ready" type="text" value="0" name="number_ready[]" required >'
+
+
+
+            row.appendChild(td1);
+            row.appendChild(td2);
+            row.appendChild(td3);
+            row.appendChild(td4);
+            row.appendChild(td5);
+            row.appendChild(td6);
+            row.appendChild(td7);
+            row.appendChild(td8);
+            row.appendChild(td9);
+            tbody.appendChild(row);
+
+            $('.tert tbody tr').each(function(i) {
+                var number = i + 1;
+                $(this).find('td:first').text(number+".");
+            });
+
+            $(function() { // ловим клик по крестику или подложке
+                $('#modal_form')
+                    .animate({opacity: 0, top: '45%'}, 200,  // плавно меняем прозрачность на 0 и одновременно двигаем окно вверх
+                        function(){ // после анимации
+                            $(this).css('display', 'none'); // делаем ему display: none;
+                            $('#overlay').fadeOut(400); // скрываем подложку
+                        }
+                    );
+            });
+
         }else {
             $(function() { // ловим клик по крестику или подложке
                 $('#modal_form')
