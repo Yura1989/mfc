@@ -431,10 +431,13 @@ class Home extends CI_Controller {
 
         /*"Сохранить" - сохранение уже заполнееного отчета*/
         } elseif (isset ($_POST['BTsaveEditReport'])){
-            //$out = array();
             $i=0;
+            print_r(count($_POST['number_reception']));
+            print_r($_POST);
+
             while ($i < count($_POST['number_reception']))
             {
+
                 $id_report = $_POST['id_report'][$i];
                 $month = $_POST['dateReport'];
                 $number_reception = $_POST['number_reception'][$i];
@@ -443,7 +446,6 @@ class Home extends CI_Controller {
                 $number_bus_cons = $_POST['number_bus_cons'][$i];
                 $number_ready = $_POST['number_ready'][$i];
                 $itog = $number_reception + $number_consultation;
-                //$out[] = "(".$id_report.", '" . $month . "', " . $number_reception . ", " . $number_consultation . ", " . $number_bus_recep . ", " . $number_bus_cons . ", " . $number_ready . ", " . $itog . ")";
                 $query = sprintf("UPDATE reports
                                              SET
                                                  number_reception = ('%s'),
@@ -453,9 +455,11 @@ class Home extends CI_Controller {
                                                  number_ready = ('%s'),
                                                  result = ('%s')
                                              WHERE date = '%s' AND id_report = '%s';", trim($number_reception), trim($number_consultation), trim($number_bus_recep), trim($number_bus_cons), trim($number_ready), trim($itog), trim($month), trim($id_report));
-                    $this->load->Model('Model_db');
-                    $this->Model_db->DBsaveReport($query);
-                        header("Location: rangeReport");
+                print_r($query);
+                print_r("<br>");
+//                $this->load->Model('Model_db');
+//                    $this->Model_db->DBsaveReport($query);
+//                        header("Location: rangeReport");
                 $i++;
             }
         }

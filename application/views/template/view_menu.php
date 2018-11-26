@@ -18,7 +18,7 @@
                         </li>
                         <li class="sidenav-heading">Навигация</li>
                         <li class="sidenav-item has-subnav">
-                            <a href="messenger.html" aria-haspopup="true">
+                            <a href="<?=base_url();?>Home/sendSms" aria-haspopup="true">
                                 <span class="sidenav-icon icon icon-comments"></span>
                                 <span class="sidenav-label">SMS-сообщения</span>
                             </a>
@@ -70,7 +70,7 @@
                         </li>
                         <!--Система настройки ведомств и услуг-->
                         <li class="sidenav-item has-subnav">
-                            <a href="contacts.html"  aria-haspopup="true">
+                            <a href="<?=base_url();?>home/service"  aria-haspopup="true">
                                 <span class="sidenav-icon icon icon-users"></span>
                                 <span class="sidenav-label">Настройка отчетов</span>
                             </a>

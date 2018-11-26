@@ -7,7 +7,21 @@
             window.location = "rangeReport";
         }
     }
+
+    /*Динамическое удаление услуг*/
+    function delete_service(r){
+        if (confirm ("Вы точно хотите удалить данную услугу?")) {
+            var i=r.parentNode.parentNode.rowIndex;
+            document.getElementById('myTable').deleteRow(i)
+            /*автоматический подсчет строк*/
+            $('.tert tbody tr').each(function(i) {
+                var number = i + 1;
+                $(this).find('td:first').text(number+".");
+            });
+        }
+    }
 </script>
+
 
 <style type="text/css">
     /* Окно */
@@ -126,11 +140,7 @@
                                        <input class="number_ready" type="text" value="<?php if (isset($item['number_ready'])) { echo $item['number_ready']; } else { echo "0";} ?>" name="number_ready[]" required <?php if (($flag) == 0) { echo ""; } else { echo "disabled"; } ?>
                                     </td>
                                     <td style="display:none;" class="Form_show">
-                                        <?php $delete = sprintf(
-                                            "<a href='javascript:delete_department(%d);'>Удалить</a>",
-                                            $item['id_department']);
-                                        ?>
-                                        <?php echo $delete;?>
+                                        <button class="btn btn-outline-primary delete_ser" onclick="delete_service(this);" type="button">Удалить</button>
                                     </td>
                                 </tr>
 
@@ -251,6 +261,7 @@
 
     });
 
+    /*Динамическое добавление услуг*/
     function addservices (id){
         if (confirm ("Вы точно хотите добавить данную услугу?"))
         {
@@ -260,18 +271,16 @@
             var fullDepartment = n.options[n.selectedIndex].dataset.fulldep;
             var id_service = n.options[n.selectedIndex].dataset.id_service;
 
-            console.log(services);
-            console.log(shortDepartment);
-
             var tbody = document.getElementById(id).getElementsByTagName("TBODY")[0];
             var row = document.createElement("TR");
             var td1 = document.createElement("TD");
             td1.appendChild(document.createTextNode(0));
 
+            /*Наименование ведомства*/
             var td2 = document.createElement("TD");
-            td2.innerHTML='<input type="hidden" class="number_reception" value="shortDepartment" name="id_service[]" required>'
-            //td2.appendChild (document.createTextNode(shortDepartment));
+            td2.innerHTML='<a href="#"></a> '+ shortDepartment + ' <input type="hidden" value="0" name="id_report[]" required ?>';
 
+            /*Наименование услуги*/
             var td3 = document.createElement("TD");
             td3.appendChild(document.createTextNode(services));
 
@@ -293,7 +302,8 @@
             var td9 = document.createElement("TD");
             td9.innerHTML='<input class="number_ready" type="text" value="0" name="number_ready[]" required >'
 
-
+            var td10 = document.createElement("TD");
+            td10.innerHTML='<button class="btn btn-outline-primary delete_ser" onclick="delete_service(this);" type="button">Удалить</button>';
 
             row.appendChild(td1);
             row.appendChild(td2);
@@ -304,6 +314,7 @@
             row.appendChild(td7);
             row.appendChild(td8);
             row.appendChild(td9);
+            row.appendChild(td10);
             tbody.appendChild(row);
 
             $('.tert tbody tr').each(function(i) {
